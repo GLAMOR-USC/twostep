@@ -199,3 +199,8 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+.padding-table-columns td
+{
+    padding:0 5px 0 0; /* Only right padding*/
+}
