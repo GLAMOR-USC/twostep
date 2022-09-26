@@ -148,7 +148,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a target="_blank" href=""
+                <a target="_blank" href="https://arxiv.org/abs/2209.11302"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -159,7 +159,7 @@
 
             <!-- Video Link. -->
             <span class="link-block">
-              <a target="_blank" href=""
+              <a target="_blank" href="#video"
                  class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                     <i class="fab fa-youtube"></i>
@@ -289,10 +289,52 @@
   <!-- Paper video. -->
   <div class="columns is-centered has-text-centered">
     <div class="column is-two-thirds">
-      <h2 class="title is-3">Video</h2>
+      <h2 class="title is-3"><a href="#video">Video</a></h2>
       <div class="publication-video">
         <iframe src="static/media/videos/recording_3min.mp4"
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 dprogprompt">ProgPrompt</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce a prompting method that uses programming language features 
+            to tackle these challenges. <span class="dprogprompt">ProgPrompt</span>
+            provides an LLM with a pythonic program header that imports available actions 
+            and their arguments, shows a list of environment objects, 
+            followed by multiple example task plans, formatted as pythonic functions. 
+            The function name is the task specification, and the function implementation 
+            is an example task plan. The plan consists of comments, actions, and assertions. 
+            We use comments to group multiple high-level actions together, similar to chain-of-thought 
+            reasoning. Actions are expressed as imported function calls. Assertions check for 
+            action pre-conditions, and trigger recovery actions. Finally we append an incomplete 
+            function definition for the LLM to complete. The plan is interpreted by executing actions 
+            in the env and asserting preconditions using the LLM.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ mothod. -->
+  </div>
+
+  <!-- Paper video. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-two-thirds">
+      <!-- <h2 class="title is-3">Video</h2> -->
+      <div class="publication-video">
+        <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+          <source src="static/media/videos/method.mov"
+                  type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -315,16 +357,34 @@
             <div class="hero-body">
               <div class="container">
                 <h2 class="subtitle has-text-centered">
-                  <span>Real Robot Results</span>
+                  <span>Real Robot Demo</span> <br>
+                  Task: sort fruits on the plate and bottle in the box
                   <!-- is an end-to-end behavior-cloning agent that can learn <br><b>a single language-conditioned policy</b> for 18 RLBench tasks with <b>249 unique task variations</b> -->
                   </h2>
-                <h5 class="subtitle has-text-centered">
-                  <span>Task: sort fruits on the plate and bottle in the box</span>
-                  </h5>
+                <div class="columns is-vcentered  is-centered">
+                  <video id="teaser" autoplay muted loop height="100%">
+                    <source src="static/media/videos/real-robot.mp4"
+                            type="video/mp4">
+                  </video>
+                  <!-- </br> -->
+                </div>
+                <!-- <br> -->
+
+              </div>
+            </div>
+
+
+            <div class="hero-body">
+              <div class="container">
+                <h2 class="subtitle has-text-centered">
+                  <span>VirtualHome Demo </span> <br>
+                  Task: microwave salmon
+                  <!-- is an end-to-end behavior-cloning agent that can learn <br><b>a single language-conditioned policy</b> for 18 RLBench tasks with <b>249 unique task variations</b> -->
+                  </h2>
                 <div class="columns is-vcentered  is-centered">
                   
                   <video id="teaser" autoplay muted loop height="100%">
-                    <source src="static/media/videos/real-robot.mp4"
+                    <source src="static/media/videos/VH_demo.mov"
                             type="video/mp4">
                   </video>
                   <!-- </br> -->
@@ -420,7 +480,7 @@
 
         <!-- Interpolating. -->
         <h2 class="subtitle has-text-centered">
-          <span>Task Programs</span>
+          <span>Generated Task Programs</span>
           <!-- is an end-to-end behavior-cloning agent that can learn <br><b>a single language-conditioned policy</b> for 18 RLBench tasks with <b>249 unique task variations</b> -->
           </h2>
         <!-- <div class="content has-text-justified">
