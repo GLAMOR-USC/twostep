@@ -69,8 +69,48 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript"
+    src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 </head>
 <body onload="updateSingleVideo(); updateQpredVideo();">
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" target="_blank" href="https://mohitshridhar.com">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" target="_blank" href="https://robot-colosseum.github.io/">
+              The Colosseum
+            </a>
+            <a class="navbar-item" target="_blank" href="http://progprompt.github.io/">
+              ProgPrompt
+            </a>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </nav>
 
 <section class="hero">
   <div class="hero-body">
@@ -119,15 +159,15 @@
             </span> -->
 
             <!-- Code Link. -->
-            <!-- <span class="link-block">
-              <a target="_blank" href="https://github.com/NVlabs/progprompt-vh"
+            <span class="link-block">
+              <a target="_blank" href="https://glamor-usc.github.io/twostep/"
                  class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                     <i class="fab fa-github"></i>
                 </span>
-                <span>Code</span>
+                <span>Code (soon)</span>
                 </a>
-            </span> -->
+            </span>
 
             <!-- poster Link. -->
             <!-- <span class="link-block">
@@ -168,6 +208,7 @@
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container has-text-centered">
+      <h2 class="title is-4"><span class="dprogprompt">TwoStep</span> multi-agent planning in AI2THOR</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <h4 class="title is-6">Put an apple, a heated egg, and a clean fork on the dining table</h4>
@@ -205,7 +246,11 @@
         <div class="item">
           <h4 class="title is-6">Clear out the dining table by removing the plate, two bowls, and the mug</h4>
           <video poster=""  autoplay muted loop playsinline height="100%">
-            <source src="static/media/videos/task4/agent1_.mp4"
+            <source src="static/media/videos/task2/agent0_.mp4"
+                    type="video/mp4">
+          </video>
+          <video poster=""  autoplay muted loop playsinline height="100%">
+            <source src="static/media/videos/task2/agent1_.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -263,11 +308,11 @@
         <div class="content has-text-justified">
           <p>
             We propose decomposing multi-agent planning problem into two single agent planning problems by leveraging LLM's commonsense and reasoning contextualized with humans operating together in diverse scenarios. 
-            In particular, we consider a two-agent planning problem with a \helper\ and \main\ agent.
-            For a given problem $\mathrm{P}$, the \helper\ plans $\pi_h = \prod(i, g')$ to reach a subgoal state $g'$ from $\mathrm{P}$'s initial state $i$, using a planner $\prod$. 
-            This subgoal state ($g'$) then serves as the initial state ($i' = E(i, \prod(s, g')$) for the \main\ agent plan $\pi_m = \prod(i', g)$ to reach the $\mathrm{P}$'s specified goal, $g$, where $E$ refers to \textit{Plan Execution}. 
-            The \helper\ conceives $g'$ using 2 modules: \sggen\ to produce a possible helper subgoal in English - \engsg, and \sgtrans\ to translate English subgoal into PDDL format goal - \pddlsg.
-            We hypothesize that the commonsense reasoning abilities of LLMs can be leveraged in this context to predict \helper\ agent subgoals whose plan actions $\pi_h$ will be executable in parallel to those of the \main\ agent $\pi_m$, where latter takes for granted that the former will achieve the subgoal eventually.
+            In particular, we consider a two-agent planning problem with a helper and main agent.
+            For a given problem $\mathrm{P}$, the helper plans $\pi_h = \prod(i, g')$ to reach a subgoal state $g'$ from $\mathrm{P}$'s initial state $i$, using a planner $\prod$. 
+            This subgoal state ($g'$) then serves as the initial state ($i' = E(i, \prod(s, g')$) for the main agent plan $\pi_m = \prod(i', g)$ to reach the $\mathrm{P}$'s specified goal, $g$, where $E$ refers to Plan Execution. 
+            The helper conceives $g'$ using 2 modules: Subgoal Generator to produce a possible helper subgoal in English - English Subgoal, and Subgoal Translator to translate English subgoal into PDDL format goal - PDDL Subgoal.
+            We hypothesize that the commonsense reasoning abilities of LLMs can be leveraged in this context to predict helper agent subgoals whose plan actions $\pi_h$ will be executable in parallel to those of the main agent $\pi_m$, where latter takes for granted that the former will achieve the subgoal eventually.
           </p>
         </div>
       </div>
