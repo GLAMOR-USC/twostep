@@ -110,7 +110,7 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" target="_blank" href="https://mohitshridhar.com">
+        <a class="navbar-item" target="_blank" href="https://ishikasingh.github.io/">
         <span class="icon">
             <i class="fas fa-home"></i>
         </span>
@@ -143,6 +143,8 @@
           <!-- <h3 class="title is-4 conference-authors"><a target="_blank" href="https://www.icra2023.org/welcome">ICRA 2023</a></h3>
           <h3 class="title is-4 conference-authors">Extended version in <a target="_blank" href="https://link.springer.com/article/10.1007/s10514-023-10135-3">Autonomous Robots 2023</a></h3> -->
           <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a target="_blank" href="https://www.davidbai.dev/">David Bai</a><sup>1</sup>,</span>
             <span class="author-block">
               <a target="_blank" href="https://ishikasingh.github.io/">Ishika Singh</a><sup>1</sup>,</span>
             <span class="author-block">
@@ -290,13 +292,13 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Classical planning formulations like the Planning Domain Definition Language (PDDL) admit action sequences guaranteed to achieve a goal state given an initial state if any are possible. 
-            However, reasoning problems defined in PDDL do not capture temporal aspects of action taking, for example that two agents in the domain can execute an action simultaneously if postconditions of each do not interfere with preconditions of the other. 
-            A human expert can decompose a goal into largely independent constituent parts and assign each agent to one of these subgoals to take advantage of simultaneous actions for faster execution of plan steps, each using only single agent planning.
-            By contrast, large language models (LLMs) used for directly inferring plan steps do not guarantee execution success, but do leverage commonsense reasoning to assemble action sequences.
-            We combine the strengths of classical planning and LLMs by approximating human intuitions for two-agent planning goal decomposition.
-            We demonstrate that LLM-based goal decomposition leads to faster planning times than solving multi-agent PDDL problems directly while simultaneously achieving fewer plan execution steps than a single agent plan alone and preserving execution success.
-            Additionally, we find that LLM-based approximations of subgoals can achieve similar multi-agent execution steps than those specified by human experts.
+            Classical planning formulations like the Planning Domain Definition Language (PDDL) admit action sequences guaranteed to achieve a goal state given an initial state if any are possible.
+            However, reasoning problems defined in PDDL do not capture temporal aspects of action taking, such as concurrent actions between two agents when there are no conflicting conditions, without significant modification and definition to existing PDDL domains. 
+            A human expert aware of such constraints can decompose a goal into subgoals, each reachable through single agent planning, to take advantage of simultaneous actions. 
+            In contrast to classical planning, large language models (LLMs) directly used for inferring plan steps rarely guarantee execution success, but are capable of leveraging commonsense reasoning to assemble action sequences. 
+            We combine the strengths of both classical planning and LLMs by approximating human intuitions for multi-agent planning goal decomposition. 
+            We demonstrate that LLM-based goal decomposition leads to faster planning times than solving multi-agent PDDL problems directly while simultaneously achieving fewer plan execution steps than a single agent plan alone, as well as most multiagent plans, while guaranteeing execution success. 
+            Additionally, we find that LLM-based approximations of subgoals result in similar multi-agent execution lengths to those specified by human experts.
           </p>
         </div>
       </div>
@@ -312,7 +314,7 @@
         <!-- <iframe src="static/media/videos/recording_3min.mp4"
                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
           <video poster="" id="mask" controls playsinline height="100%">
-            <source src="static/media/videos/IROS_2024_Video_submission.mp4"
+            <source src="static/media/videos/IROS_TwoStep_2025.mp4"
                     type="video/mp4">
           </video>
       </div>
@@ -329,12 +331,11 @@
         <h2 class="title is-3 dprogprompt">TwoStep</h2>
         <div class="content has-text-justified">
           <p>
-            We propose decomposing multi-agent planning problem into two single agent planning problems by leveraging LLM's commonsense and reasoning contextualized with humans operating together in diverse scenarios. 
-            In particular, we consider a two-agent planning problem with a helper and main agent.
-            For a given problem $\mathrm{P}$, the helper plans $\pi_h = \prod(i, g')$ to reach a subgoal state $g'$ from $\mathrm{P}$'s initial state $i$, using a planner $\prod$. 
-            This subgoal state ($g'$) then serves as the initial state ($i' = E(i, \prod(s, g')$) for the main agent plan $\pi_m = \prod(i', g)$ to reach the $\mathrm{P}$'s specified goal, $g$, where $E$ refers to Plan Execution. 
-            The helper conceives $g'$ using 2 modules: Subgoal Generator to produce a possible helper subgoal in English - English Subgoal, and Subgoal Translator to translate English subgoal into PDDL format goal - PDDL Subgoal.
-            We hypothesize that the commonsense reasoning abilities of LLMs can be leveraged in this context to predict helper agent subgoals whose plan actions $\pi_h$ will be executable in parallel to those of the main agent $\pi_m$, where latter takes for granted that the former will achieve the subgoal eventually.
+            We propose decomposing an $N$-agent planning problem into $N$ single-agent planning problems by leveraging the human-like commonsense reasoning capabilities of LLMs. 
+            Specifically, we consider a multiagent scenario with $N-1$ helper agents and one main agent.
+            For a given problem $\mathrm{P}$, containing object definitions, initial state $i$ and goal conditions $g$, each helper agent $h$ generates a plan $\pi_h = \prod(i, g_h)$ to reach a subgoal state $g_h$ from the initial state $i$ using a planner $\prod$. The resulting state $i_{h+1} = E(i, \prod(i, g_h))$, where $E$ is Plan Execution returning the state reached after starting from $i$ and executing steps $\prod(i, g_h)$, serves as the starting point for the next helper agent.
+            This iteration continues until the main agent executes $\pi_m = \prod(i_{N-1}, g)$ to achieve the final goal $g$. 
+            Each helper agent’s subgoal $g_h$ is generated through two modules: a subgoal generator for English subgoal generation and a subgoal translator for translating it into a PDDL subgoal. We hypothesize that LLMs can infer helper subgoals that enable parallel execution alongside the \main\ agent while assuming all agents will eventually achieve their respective goals.
           </p>
         </div>
       </div>
@@ -347,10 +348,7 @@
     <div class="column is-two-thirds">
       <!-- <h2 class="title is-3">Video</h2> -->
       <div class="publication-video">
-        <video poster="" id="mask" autoplay muted loop playsinline height="100%">
-          <source src="static/media/videos/method.mp4"
-                  type="video/mp4">
-        </video>
+        <img src="static/media/videos/twostep_method.gif" alt="TwoStep Method Animation" height="100%">
       </div>
     </div>
   </div>
@@ -373,7 +371,7 @@
         <h2 class="subtitle has-text-centered">
           <span>Full Subgoal Generator and Subgoal Translator Prompts</span>
           </h2>
-        <object data="static/media/figures/prompts.pdf#toolbar=0&navpanes=0&scrollbar=0" width="80%" height="1530px" 
+        <object data="static/media/figures/prompts25.pdf#toolbar=0&navpanes=0&scrollbar=0" width="80%" height="1530px" 
             type="application/pdf"></object>
 </section> 
 
@@ -383,7 +381,7 @@
     <h2 class="title">BibTeX</h2>
  <pre><code>@article{singh2024twostep,
   title={TwoStep: Multi-agent Task Planning using Classical Planners and Large Language Models}, 
-  author={Ishika Singh and David Traum and Jesse Thomason},
+  author={David Bai and Ishika Singh and David Traum and Jesse Thomason},
   year={2024},
   eprint={2403.17246},
   archivePrefix={arXiv},
